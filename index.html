@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Oviedo RP</title>
+<meta name="description" content="Oviedo RP: comunidad de rol español. Normativa, zonas seguras y acceso al Discord.">
+<meta name="theme-color" content="#050b1d">
+<meta property="og:title" content="Oviedo RP">
+<meta property="og:description" content="Un rol serio, justo y divertido para todos.">
+<link rel="icon" href="logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050b1d; --bg2:#0a1535; --blue:#3b82f6; --sky:#7db6ff; --gold:#fbbf24;
+  --ink:#eaf0ff; --mute:#9fb0d6; --glass:rgba(255,255,255,.055); --line:rgba(255,255,255,.12);
+  --r:20px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:24px}
+body{font-family:Inter,system-ui,sans-serif;color:var(--ink);line-height:1.6;background:var(--bg);overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+   radial-gradient(900px 600px at 80% -5%,rgba(59,130,246,.35),transparent 60%),
+   radial-gradient(700px 500px at -5% 40%,rgba(251,191,36,.12),transparent 60%),
+   radial-gradient(800px 600px at 100% 90%,rgba(59,130,246,.22),transparent 60%),
+   linear-gradient(180deg,var(--bg),var(--bg2) 60%,var(--bg))}
+body:after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.35;
+  background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+  background-size:56px 56px;mask-image:radial-gradient(ellipse at 50% 20%,#000 20%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse at 50% 20%,#000 20%,transparent 75%)}
+h1,h2,h3{font-family:"Bricolage Grotesque",Inter,sans-serif;line-height:1.05;letter-spacing:-.01em}
+a{color:inherit;text-decoration:none}
+.progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--blue),var(--gold));z-index:100}
+
+/* sidebar */
+.side{position:fixed;inset:14px auto 14px 14px;width:240px;padding:22px 16px;display:flex;flex-direction:column;gap:22px;z-index:50;
+  background:rgba(10,21,53,.62);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid var(--line);border-radius:26px}
+.brand{display:flex;align-items:center;gap:12px;font-family:"Bricolage Grotesque";font-weight:800;font-size:1.3rem}
+.brand img{width:46px;height:46px;border-radius:50%;box-shadow:0 0 0 2px rgba(125,182,255,.5),0 6px 18px rgba(59,130,246,.5)}
+.brand em{color:var(--gold);font-style:normal}
+.nav{display:flex;flex-direction:column;gap:4px}
+.nav a{padding:11px 14px;border-radius:14px;color:var(--mute);font-weight:500;display:flex;gap:10px;align-items:center;transition:.25s}
+.nav a:hover{background:rgba(255,255,255,.07);color:#fff;transform:translateX(3px)}
+.nav a.on{background:linear-gradient(135deg,var(--blue),#2457c9);color:#fff;box-shadow:0 8px 22px rgba(59,130,246,.4)}
+.side .cta{margin-top:auto}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:14px 26px;border-radius:999px;font-weight:600;border:0;cursor:pointer;transition:.25s;font-size:1rem;font-family:inherit}
+.btn.gold{background:linear-gradient(135deg,#ffd75e,var(--gold));color:#2a1d00;box-shadow:0 10px 30px rgba(251,191,36,.35)}
+.btn.gold:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(251,191,36,.55)}
+.btn.ghost{background:var(--glass);color:#fff;border:1px solid var(--line);backdrop-filter:blur(8px)}
+.btn.ghost:hover{background:rgba(255,255,255,.13);transform:translateY(-3px)}
+.btn.full{width:100%}
+main{margin-left:270px}
+section{padding:90px 5vw;position:relative}
+.top,.mnav{display:none}
+
+/* hero */
+.hero{min-height:100vh;display:grid;grid-template-columns:1.05fr .95fr;gap:30px;align-items:center}
+.tag{display:inline-flex;align-items:center;gap:8px;background:var(--glass);border:1px solid var(--line);padding:7px 16px;border-radius:999px;font-size:.85rem;margin-bottom:22px;backdrop-filter:blur(8px)}
+.tag i{width:8px;height:8px;border-radius:50%;background:#34d399;box-shadow:0 0 0 0 rgba(52,211,153,.7);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 10px rgba(52,211,153,0)}100%{box-shadow:0 0 0 0 rgba(52,211,153,0)}}
+.hero h1{font-size:clamp(3.4rem,8.5vw,7rem);font-weight:800}
+.hero h1 span{display:block;background:linear-gradient(180deg,#fff,#b7cdf7);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero h1 b{display:block;background:linear-gradient(135deg,#6aa8ff,var(--blue) 45%,#a5c8ff);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 6px 30px rgba(59,130,246,.55))}
+.hero p{max-width:520px;color:var(--mute);margin:22px 0 32px;font-size:1.12rem}
+.row{display:flex;gap:12px;flex-wrap:wrap}
+.stats{display:flex;gap:14px;margin-top:40px;flex-wrap:wrap}
+.stat{background:var(--glass);border:1px solid var(--line);border-radius:18px;padding:14px 20px;min-width:120px;backdrop-filter:blur(8px)}
+.stat b{display:block;font:800 1.9rem "Bricolage Grotesque";color:var(--gold)}
+.stat small{color:var(--mute);font-size:.8rem}
+.visual{position:relative;display:grid;place-items:center;min-height:440px}
+.glow{position:absolute;width:75%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(59,130,246,.65),transparent 65%);filter:blur(40px);animation:breathe 5s ease-in-out infinite}
+@keyframes breathe{50%{transform:scale(1.15);opacity:.8}}
+.ring{position:relative;width:min(470px,86%);aspect-ratio:1;border-radius:50%;padding:7px;animation:float 7s ease-in-out infinite}
+.ring:before{content:"";position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,var(--blue),var(--gold),#fff,var(--sky),var(--blue));animation:spin 8s linear infinite;filter:blur(1px)}
+.ring img{position:relative;width:100%;height:100%;border-radius:50%;display:block;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes float{50%{transform:translateY(-14px)}}
+.chip{position:absolute;background:rgba(10,21,53,.75);border:1px solid var(--line);backdrop-filter:blur(10px);padding:9px 16px;border-radius:999px;font-weight:600;font-size:.88rem;box-shadow:0 12px 30px rgba(0,0,0,.4);animation:float 6s ease-in-out infinite}
+.c1{top:8%;left:2%}.c2{top:20%;right:0;animation-delay:-2s}.c3{bottom:12%;left:0;animation-delay:-4s}.c4{bottom:4%;right:6%;animation-delay:-1s}
+
+/* marquee */
+.marquee{overflow:hidden;border-block:1px solid var(--line);background:rgba(255,255,255,.03);padding:16px 0;white-space:nowrap}
+.marquee div{display:inline-block;animation:slide 32s linear infinite;font:800 1.15rem "Bricolage Grotesque";color:var(--sky);letter-spacing:.04em}
+.marquee span{margin:0 26px}.marquee span:nth-child(even){color:var(--gold)}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* generic */
+.eyebrow{color:var(--gold);font-weight:600;letter-spacing:.16em;text-transform:uppercase;font-size:.78rem}
+h2{font-size:clamp(2.2rem,4.6vw,3.6rem);margin:10px 0 14px;font-weight:800}
+h2 em{font-style:normal;background:linear-gradient(135deg,#8ec0ff,var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{color:var(--mute);max-width:640px;font-size:1.05rem}
+.card{background:var(--glass);border:1px solid var(--line);border-radius:var(--r);padding:28px;backdrop-filter:blur(10px);transition:.3s}
+.card:hover{transform:translateY(-6px);border-color:rgba(125,182,255,.5);box-shadow:0 24px 50px rgba(59,130,246,.2)}
+
+/* about */
+.about{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
+.ic{width:54px;height:54px;border-radius:16px;display:grid;place-items:center;font-size:1.7rem;margin-bottom:16px;background:linear-gradient(135deg,rgba(59,130,246,.35),rgba(59,130,246,.08));border:1px solid rgba(125,182,255,.3)}
+.card h3{font-size:1.3rem;margin-bottom:8px}
+.card p{color:var(--mute);font-size:.96rem}
+.founder{margin-top:22px;display:flex;align-items:center;gap:22px;border-radius:var(--r);padding:26px 30px;position:relative;overflow:hidden;
+  background:linear-gradient(120deg,rgba(251,191,36,.18),rgba(59,130,246,.15));border:1px solid rgba(251,191,36,.35)}
+.founder .av{width:68px;height:68px;border-radius:50%;background:linear-gradient(135deg,#ffd75e,var(--gold));color:#2a1d00;display:grid;place-items:center;font:800 1.9rem "Bricolage Grotesque";box-shadow:0 0 0 5px rgba(251,191,36,.25)}
+.founder small{color:var(--gold);letter-spacing:.14em;font-weight:600;font-size:.75rem}
+.founder strong{display:block;font:800 1.7rem "Bricolage Grotesque"}
+.founder .crown{margin-left:auto;font-size:3rem;opacity:.9}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px;counter-reset:s}
+.step{position:relative;padding-top:56px}
+.step:before{counter-increment:s;content:"0" counter(s);position:absolute;top:20px;left:28px;font:800 2.2rem "Bricolage Grotesque";color:transparent;-webkit-text-stroke:1.5px var(--sky)}
+
+/* rules */
+.tools{display:flex;flex-direction:column;gap:16px;margin:34px 0 26px}
+.search{width:100%;max-width:480px;padding:15px 22px;border-radius:999px;border:1px solid var(--line);font:inherit;background:var(--glass);color:#fff;backdrop-filter:blur(8px)}
+.search::placeholder{color:#7f92bd}
+.search:focus{outline:2px solid var(--blue);border-color:transparent}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 8px;scrollbar-width:thin}
+.tab{white-space:nowrap;padding:10px 18px;border-radius:999px;border:1px solid var(--line);background:var(--glass);color:var(--mute);font:600 .92rem Inter;cursor:pointer;transition:.25s}
+.tab:hover{color:#fff;border-color:var(--sky)}
+.tab.on{background:linear-gradient(135deg,var(--blue),#2457c9);border-color:transparent;color:#fff;box-shadow:0 8px 22px rgba(59,130,246,.4)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.rule{background:var(--glass);border:1px solid var(--line);border-radius:var(--r);padding:24px;position:relative;overflow:hidden;transition:.3s;animation:pop .5s both}
+.rule:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,var(--blue),var(--gold))}
+.rule:hover{transform:translateY(-4px);border-color:rgba(125,182,255,.45);box-shadow:0 20px 44px rgba(59,130,246,.18)}
+@keyframes pop{from{opacity:0;transform:translateY(14px)}}
+.rule h3{font-size:1.15rem;margin-bottom:12px;display:flex;gap:12px;align-items:center}
+.rule h3 span{width:40px;height:40px;flex:none;border-radius:12px;display:grid;place-items:center;font-size:1.25rem;background:rgba(59,130,246,.18);border:1px solid rgba(125,182,255,.28)}
+.rule ul{list-style:none;display:grid;gap:8px}
+.rule li{padding-left:20px;position:relative;color:#c5d2ef;font-size:.95rem}
+.rule li:before{content:"";position:absolute;left:0;top:.62em;width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px rgba(251,191,36,.7)}
+.rule p{color:#c5d2ef;font-size:.95rem}
+.term:before{background:linear-gradient(180deg,var(--gold),#f59e0b)}
+.term b{display:block;font:800 1.4rem "Bricolage Grotesque";color:var(--gold)}
+.term b span{all:unset;color:var(--sky);font:500 .88rem Inter;margin-left:10px}
+.catlabel{font-size:.7rem;font-weight:600;color:var(--sky);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+.note{margin-top:24px;padding:18px 22px;border-radius:16px;background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.35);color:#ffe8a3;font-weight:500}
+.empty{padding:30px;color:var(--mute)}
+
+/* zones */
+.zgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:36px}
+.z{display:flex;flex-direction:column;gap:8px;padding:22px}
+.z .ic{margin-bottom:6px}
+.z h3{font-size:1.12rem}
+.z p{font-size:.9rem;color:var(--mute)}
+.badge{align-self:flex-start;margin-top:auto;font-size:.76rem;font-weight:600;padding:5px 12px;border-radius:999px;background:rgba(52,211,153,.15);color:#6ee7b7;border:1px solid rgba(52,211,153,.35)}
+.badge.no{background:rgba(248,113,113,.15);color:#fca5a5;border-color:rgba(248,113,113,.4)}
+.badge.adm{background:rgba(251,191,36,.15);color:#fde68a;border-color:rgba(251,191,36,.4)}
+.warn{margin-top:26px;padding:20px 24px;border-radius:18px;background:linear-gradient(120deg,rgba(248,113,113,.14),rgba(251,191,36,.1));border:1px solid rgba(248,113,113,.35)}
+.warn b{color:var(--gold)}
+
+/* join */
+.joinbox{position:relative;overflow:hidden;text-align:center;border-radius:32px;padding:80px 6vw;border:1px solid rgba(125,182,255,.35);
+  background:radial-gradient(600px 300px at 50% 0,rgba(59,130,246,.5),transparent 70%),linear-gradient(135deg,rgba(14,33,80,.9),rgba(8,20,46,.9))}
+.joinbox>img{position:absolute;right:-70px;bottom:-90px;width:340px;opacity:.14;border-radius:50%;pointer-events:none}
+.joinbox h2{margin-top:6px}
+.joinbox p{max-width:520px;margin:10px auto 30px;color:var(--mute);position:relative}
+.joinbox .btn{position:relative;padding:17px 38px;font-size:1.1rem}
+footer{border-top:1px solid var(--line);color:var(--mute);padding:32px 5vw;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;font-size:.9rem}
+footer img{width:34px;height:34px;border-radius:50%}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .8s,transform .8s}
+.rv.in{opacity:1;transform:none}
+
+@media(max-width:960px){
+  .side{display:none}
+  main{margin-left:0}
+  .top{display:flex;position:sticky;top:0;z-index:60;background:rgba(5,11,29,.85);backdrop-filter:blur(14px);padding:10px 16px;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+  .top .brand{font-size:1.1rem}.top .brand img{width:38px;height:38px}
+  .top .btn{padding:9px 18px;font-size:.9rem}
+  .mnav{display:flex;gap:8px;overflow-x:auto;padding:10px 16px;position:sticky;top:59px;z-index:55;background:rgba(5,11,29,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .mnav a{white-space:nowrap;padding:7px 14px;border-radius:999px;background:var(--glass);border:1px solid var(--line);font-size:.85rem;color:var(--mute)}
+  .mnav a.on{background:var(--blue);color:#fff;border-color:transparent}
+  section{padding:64px 5vw}
+  .hero{grid-template-columns:1fr;text-align:center;min-height:auto;padding-top:40px}
+  .hero p{margin-inline:auto}.row,.stats{justify-content:center}
+  .visual{order:-1;min-height:340px}.ring{width:min(320px,78%)}
+  .chip{font-size:.78rem;padding:7px 12px}
+  .about,.steps{grid-template-columns:1fr}
+  .founder{flex-wrap:wrap}.founder .crown{display:none}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="progress" id="bar"></div>
+
+<header class="top">
+  <a class="brand" href="#inicio"><img data-logo src="logo.png" alt=""><span>Oviedo <em>RP</em></span></a>
+  <a class="btn gold" href="https://discord.gg/A2dH4UyKK" target="_blank" rel="noopener">Discord</a>
+</header>
+<nav class="mnav" id="mnav">
+  <a href="#inicio" class="on">Inicio</a><a href="#nosotros">Nosotros</a><a href="#normas">Normativa</a><a href="#zonas">Zonas seguras</a><a href="#unirse">Unirse</a>
+</nav>
+
+<aside class="side">
+  <a class="brand" href="#inicio"><img data-logo src="logo.png" alt="Logo Oviedo RP"><span>Oviedo <em>RP</em></span></a>
+  <nav class="nav" id="nav">
+    <a href="#inicio" class="on">🏠 Inicio</a>
+    <a href="#nosotros">✨ Nosotros</a>
+    <a href="#normas">📜 Normativa</a>
+    <a href="#zonas">🗺️ Zonas seguras</a>
+    <a href="#unirse">🚀 Unirse</a>
+  </nav>
+  <div class="cta"><a class="btn gold full" href="https://discord.gg/A2dH4UyKK" target="_blank" rel="noopener">Entrar al Discord</a></div>
+</aside>
+
+<main>
+<section class="hero" id="inicio">
+  <div>
+    <span class="tag"><i></i> Comunidad de rol · España</span>
+    <h1><span>Oviedo</span><b>RP</b></h1>
+    <p>Un rol serio, justo y divertido para todos. Vive Oviedo con policía, emergencias, ciudadanos y mucho más.</p>
+    <div class="row">
+      <a class="btn gold" href="https://discord.gg/A2dH4UyKK" target="_blank" rel="noopener">🚀 Unirme al Discord</a>
+      <a class="btn ghost" href="#normas">📜 Leer la normativa</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><b data-count="normas">0</b><small>Normativas</small></div>
+      <div class="stat"><b data-count="zonas">0</b><small>Zonas seguras</small></div>
+      <div class="stat"><b data-count="siglas">0</b><small>Siglas de rol</small></div>
+    </div>
+  </div>
+  <div class="visual">
+    <div class="glow"></div>
+    <div class="ring"><img data-logo src="logo.png" alt="Logo de Oviedo RP"></div>
+    <span class="chip c1">🚔 Policía</span>
+    <span class="chip c2">🚑 Emergencias</span>
+    <span class="chip c3">🏛️ Oviedo</span>
+    <span class="chip c4">🎭 Rol serio</span>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true"><div id="mq"></div></div>
+
+<section id="nosotros">
+  <div class="rv">
+    <div class="eyebrow">Quiénes somos</div>
+    <h2>Rol con <em>respeto</em> y realismo</h2>
+    <p class="lead">Oviedo RP es una comunidad que busca un ambiente de rol cuidado, con normas claras y un staff cercano.</p>
+  </div>
+  <div class="about">
+    <div class="card rv"><div class="ic">🎭</div><h3>Rol serio</h3><p>Interpretación coherente y situaciones con consecuencias reales.</p></div>
+    <div class="card rv"><div class="ic">⚖️</div><h3>Normas justas</h3><p>Normativa clara para Discord, rol, vehículos, vestimenta y actividades.</p></div>
+    <div class="card rv"><div class="ic">🛡️</div><h3>Staff activo</h3><p>Soporte mediante tickets y un equipo pendiente de la comunidad.</p></div>
+  </div>
+  <div class="founder rv">
+    <div class="av">S</div>
+    <div><small>FUNDADOR Y DUEÑO</small><strong>Sergio</strong></div>
+    <div class="crown">👑</div>
+  </div>
+  <div class="steps">
+    <div class="card step rv"><h3>Entra al Discord</h3><p>Únete a la comunidad con un solo clic y conoce al equipo.</p></div>
+    <div class="card step rv"><h3>Lee la normativa</h3><p>Conoce las normas de rol, vehículos, vestimenta y actividades.</p></div>
+    <div class="card step rv"><h3>Vive el rol</h3><p>Respeta a todos, interpreta con coherencia y disfruta de Oviedo.</p></div>
+  </div>
+</section>
+
+<section id="normas">
+  <div class="rv">
+    <div class="eyebrow">Normativa oficial</div>
+    <h2>Normas de <em>Oviedo RP</em></h2>
+    <p class="lead">Léelas antes de entrar. El desconocimiento de la normativa no exime de su cumplimiento.</p>
+  </div>
+  <div class="tools">
+    <input id="q" class="search" type="search" placeholder="🔍 Buscar en todas las normas (ej. VDM, tickets, armas)…" aria-label="Buscar normas">
+    <div class="tabs" id="tabs" role="tablist"></div>
+  </div>
+  <div class="grid" id="list"></div>
+  <div class="note" id="foot"></div>
+</section>
+
+<section id="zonas">
+  <div class="rv">
+    <div class="eyebrow">Información importante</div>
+    <h2>Zonas <em>seguras</em></h2>
+    <p class="lead">En estas zonas no se puede realizar rol agresivo: disparar, matar, pegar, atropellar o iniciar enfrentamientos.</p>
+  </div>
+  <div class="zgrid" id="zgrid"></div>
+  <div class="warn rv">⚠️ El incumplimiento de esta normativa será sancionado y la acción realizada tendrá <b>Rol Nulo</b>.</div>
+</section>
+
+<section id="unirse">
+  <div class="joinbox rv">
+    <img data-logo src="logo.png" alt="">
+    <div class="eyebrow">Únete a la comunidad</div>
+    <h2>Entra al <em>Discord</em></h2>
+    <p>Abre un ticket si necesitas soporte y empieza a vivir el rol en Oviedo.</p>
+    <a class="btn gold" href="https://discord.gg/A2dH4UyKK" target="_blank" rel="noopener">🚀 Unirme ahora</a>
+  </div>
+</section>
+
+<footer><img data-logo src="logo.png" alt=""><span>© Oviedo RP · Fundador: Sergio</span></footer>
+</main>
+
+<script src="themes.js"></script>
+<script>
+const CATS=[
+{id:"discord",ic:"💬",name:"Discord",foot:"📌 Al permanecer en este servidor aceptas cumplir estas normas.",items:[
+ {i:"🤝",t:"Respeto",l:["Respeta a todos los miembros y al equipo de staff.","No se permiten insultos, acoso, amenazas o discriminación.","No provoques discusiones innecesarias."]},
+ {i:"💬",t:"Chats",l:["No hagas spam ni flood.","Utiliza cada canal correctamente.","No abuses de menciones.","No envíes mensajes repetitivos."]},
+ {i:"🚫",t:"Contenido",l:["Prohibido contenido NSFW o inapropiado.","No compartas contenido ilegal o peligroso.","No compartas datos personales de otras personas.","No publiques contenido destinado a molestar o provocar."]},
+ {i:"📢",t:"Publicidad",l:["Prohibida la publicidad de otros servidores, redes o proyectos sin autorización.","No envíes invitaciones de otros servidores sin permiso."]},
+ {i:"🎙️",t:"Canales de voz",l:["No grites ni molestes intencionadamente.","No reproduzcas sonidos molestos de forma continuada.","Respeta a los demás usuarios."]},
+ {i:"🎫",t:"Tickets",l:["Utiliza los tickets para asuntos importantes.","No abras tickets repetidamente sin motivo.","No molestes al staff durante la gestión de un ticket."]},
+ {i:"🛡️",t:"Staff",l:["Respeta las decisiones del staff.","No pidas rangos constantemente.","Si tienes una queja sobre un miembro del staff, utiliza el sistema de tickets."]},
+ {i:"⚠️",t:"Sanciones",l:["⚠️ Advertencia","🔇 Timeout","👢 Expulsión","🔨 Ban temporal","⛔ Ban permanente"]}
+]},
+{id:"rol",ic:"🚔",name:"Rol",foot:"📌 El objetivo es mantener un rol serio, justo y divertido para todos.",items:[
+ {i:"🎭",t:"1. Valoración de vida (NVV)",p:"Tu personaje debe valorar su vida y evitar situaciones en las que actúe de forma irreal."},
+ {i:"🧠",t:"2. Metagaming (MG)",p:"Está prohibido utilizar información obtenida fuera del rol para beneficiarte dentro del rol."},
+ {i:"💪",t:"3. Powergaming (PG)",p:"No puedes realizar acciones imposibles o forzar acciones sobre otros jugadores sin darles posibilidad de reaccionar."},
+ {i:"🚗",t:"4. VDM",p:"Está prohibido utilizar un vehículo como arma sin una situación de rol que lo justifique."},
+ {i:"🔫",t:"5. RDM",p:"Está prohibido atacar o eliminar a otro jugador sin motivo de rol válido."},
+ {i:"🚨",t:"6. NRE",p:"Debes tener en cuenta la presencia de servicios de emergencia o autoridades cuando la situación lo requiera."},
+ {i:"🔧",t:"7. NRA",p:"No ignores las consecuencias del uso de armas o situaciones que deberían generar una reacción dentro del rol."},
+ {i:"💀",t:"8. CK",p:"La muerte permanente de un personaje solo podrá realizarse siguiendo las condiciones establecidas por la administración."},
+ {i:"🏃",t:"9. Evadir rol",p:"Está prohibido abandonar una situación de rol para evitar sus consecuencias."},
+ {i:"🎬",t:"10. Interpretación",p:"Debes interpretar a tu personaje de forma coherente y mantener el rol durante las situaciones."},
+ {i:"🔄",t:"11. Reinicio de rol",p:"No utilices información o acontecimientos de un rol anterior para obtener ventaja en uno nuevo."},
+ {i:"⚠️",t:"12. Sanciones",p:"El incumplimiento de estas normas podrá conllevar advertencias, sanciones administrativas o expulsión del servidor."}
+]},
+{id:"veh",ic:"🚗",name:"Vehículos",foot:"⚠️ El incumplimiento de estas normas podrá ser sancionado por el staff.",items:[
+ {i:"🚦",t:"1. Circulación",l:["Respeta las señales, semáforos y normas de circulación.","No conduzcas por aceras o zonas peatonales sin motivo de rol.","Circula por el sentido correspondiente."]},
+ {i:"🏎️",t:"2. Conducción",l:["Prohibida la conducción temeraria sin motivo de rol.","No hagas carreras por zonas urbanas sin autorización.","Evita derrapes o maniobras peligrosas innecesarias."]},
+ {i:"💥",t:"3. Accidentes",l:["Los accidentes deben interpretarse correctamente.","No continúes conduciendo como si nada después de un accidente grave.","En accidentes importantes, realiza el rol correspondiente."]},
+ {i:"🚔",t:"4. Persecuciones",l:["Las persecuciones deben tener un motivo de rol.","No provoques persecuciones intencionadamente.","Respeta las acciones de los servicios de emergencia."]},
+ {i:"🚙",t:"5. Vehículos",l:["No utilices vehículos de servicio sin autorización.","No conduzcas vehículos que tu personaje no debería poder utilizar.","No abuses de vehículos para obtener ventajas durante el rol."]},
+ {i:"🅿️",t:"6. Aparcamiento",l:["Aparca de forma coherente con el entorno.","No bloquees carreteras, entradas o zonas importantes."]},
+ {i:"🔧",t:"7. Daños",l:["Los daños graves del vehículo deben interpretarse.","Si el vehículo queda inutilizado, no continúes conduciendo normalmente."]},
+ {i:"🚫",t:"8. VDM",l:["Está prohibido utilizar deliberadamente un vehículo para atropellar o atacar a otros jugadores."]}
+]},
+{id:"vest",ic:"👕",name:"Vestimenta",foot:"📌 Utiliza siempre una vestimenta coherente con tu personaje y la situación de rol.",items:[
+ {i:"👔",t:"1. Vestimenta",l:["La ropa debe ser adecuada para el personaje y la situación.","No se permite utilizar prendas que rompan la ambientación del rol.","Evita combinaciones excesivamente irreales."]},
+ {i:"👮",t:"2. Servicios públicos",l:["Solo se podrán utilizar uniformes oficiales cuando el personaje pertenezca al cuerpo correspondiente.","No se permite hacerse pasar por un miembro de un servicio público mediante la vestimenta."]},
+ {i:"🎭",t:"3. Coherencia",l:["La vestimenta debe tener sentido con el lugar y la situación.","No cambies de ropa durante una situación de rol para evitar ser identificado."]},
+ {i:"🚫",t:"4. Contenido inapropiado",l:["No se permite vestimenta con contenido ofensivo, discriminatorio o inapropiado.","No se permite contenido sexualizado o NSFW."]},
+ {i:"⚠️",t:"5. Sanciones",p:"El incumplimiento de estas normas podrá conllevar una sanción administrativa."}
+]},
+{id:"legal",ic:"⚖️",name:"Act. legales",foot:"📌 Todas las actividades legales deben realizarse respetando el rol y las normas del servidor.",items:[
+ {i:"👷",t:"1. Trabajos legales",l:["Los trabajos legales deben realizarse de forma coherente con el rol.","No se permite utilizar trabajos legales para obtener ventajas de forma irreal."]},
+ {i:"🚕",t:"2. Servicios",l:["Respeta las funciones correspondientes a cada profesión.","No utilices vehículos o equipamiento de empresas ajenas sin autorización."]},
+ {i:"💰",t:"3. Dinero",l:["Está prohibido generar dinero mediante bugs, exploits o métodos ilegales fuera del rol.","No transfieras dinero de forma abusiva para beneficiar a otros jugadores."]},
+ {i:"🚗",t:"4. Vehículos de empresa",l:["Utiliza los vehículos de trabajo únicamente para sus funciones correspondientes.","Devuelve o guarda los vehículos correctamente al finalizar el servicio."]},
+ {i:"🎭",t:"5. Interpretación",l:["Mantén una actitud acorde con tu profesión.","No abandones una actividad o servicio únicamente para evitar una situación de rol."]},
+ {i:"🚫",t:"6. Abusos",l:["No aproveches trabajos legales para molestar, bloquear zonas o perjudicar a otros jugadores.","No falsifiques trabajos, servicios o situaciones para obtener beneficios."]},
+ {i:"⚠️",t:"7. Sanciones",p:"El incumplimiento de estas normas podrá conllevar una sanción administrativa."}
+]},
+{id:"ilegal",ic:"🔫",name:"Act. ilegales",foot:"📌 Las actividades ilegales deben mantener siempre una interpretación coherente y respetuosa con el rol.",items:[
+ {i:"🎭",t:"1. Inicio de actividades",l:["Toda actividad ilegal debe tener un motivo y desarrollarse dentro del rol.","No se permite iniciar situaciones ilegales únicamente para provocar a otros jugadores."]},
+ {i:"👥",t:"2. Grupos",l:["Respeta los límites de miembros establecidos para cada grupo.","No se permite colaborar con otros grupos cuando las normas lo prohíban."]},
+ {i:"🔫",t:"3. Armas",l:["El uso de armas debe estar justificado por la situación de rol.","No se permite sacar o utilizar un arma sin motivo."]},
+ {i:"🚗",t:"4. Vehículos",l:["No utilices vehículos para atropellar intencionadamente.","Los vehículos deben utilizarse de forma coherente durante persecuciones o huidas."]},
+ {i:"🚔",t:"5. Policía",l:["Respeta las actuaciones policiales y permite que las situaciones se desarrollen.","No provoques a la policía sin motivo de rol."]},
+ {i:"💰",t:"6. Robos y delitos",l:["Los robos y demás delitos deben respetar las condiciones establecidas por el servidor.","No se permite abusar de actividades ilegales para conseguir dinero o ventajas de forma injusta."]},
+ {i:"🧠",t:"7. MG / PG",l:["Está prohibido utilizar información obtenida fuera del rol.","No realices acciones imposibles o fuerces acciones sobre otros jugadores."]},
+ {i:"🚫",t:"8. Abuso",l:["No se permite repetir actividades ilegales constantemente para molestar o generar situaciones sin sentido.","Está prohibido utilizar bugs o exploits para obtener ventajas."]},
+ {i:"⚠️",t:"9. Sanciones",p:"El incumplimiento de estas normas podrá conllevar sanciones administrativas según la gravedad."}
+]},
+{id:"glos",ic:"📖",name:"Significados",foot:"📌 Conoce las siglas del rol para evitar sanciones.",terms:[
+ ["BD","Bad Driving","Conducir de manera irrealista o temeraria dentro del rol."],
+ ["MG","Metagaming","Utilizar información obtenida fuera del rol dentro del juego."],
+ ["PG","PowerGaming","Realizar acciones irreales o forzar situaciones que no permiten reaccionar al otro jugador."],
+ ["DM","Deathmatch","Atacar o matar a otro jugador sin motivo de rol válido."],
+ ["RDM","Random Deathmatch","Atacar o matar a un jugador sin motivo de rol."],
+ ["VDM","Vehicle Deathmatch","Utilizar un vehículo para atropellar o atacar a otros jugadores sin motivo de rol."],
+ ["RK","Revenge Kill","Volver para vengarse de alguien que te ha eliminado."],
+ ["CK","Character Kill","Muerte definitiva del personaje, si está permitida por la normativa del servidor."],
+ ["PK","Player Kill","Muerte del personaje con pérdida de memoria o consecuencias establecidas por la normativa del servidor."],
+ ["NRE","No Roleplay Environment","No respetar el entorno y las circunstancias del rol."],
+ ["NRA","No Roleplay Attack","Realizar un ataque sin desarrollar el rol correspondiente."],
+ ["NVV","No Valorar la Vida","No valorar la vida del personaje ante una amenaza real dentro del rol."],
+ ["BA","Bug Abuse","Aprovecharse de un error del juego para obtener ventajas."],
+ ["AA","Admin Abuse","Abusar de los permisos o poderes administrativos."],
+ ["FA","FailRP","Realizar acciones que rompen la lógica o el realismo del rol."],
+ ["FR","FearRP","Representar el miedo ante situaciones peligrosas según las normas del servidor."],
+ ["ZZ","Zigzag","Correr haciendo zigzag de forma abusiva para evitar impactos o disparos, si la normativa lo prohíbe."],
+ ["CL","Combat Logging","Salir del juego para evitar las consecuencias de una situación de rol."]
+]}
+];
+
+const ZONES=[
+ ["🏙️","Spawn ciudad","Se prohíbe el rol dentro del spawn.","no","Sin rol"],
+ ["🏘️","Spawn SpringField","Zona cerrada por administración.","adm","Cerrada"],
+ ["🏥","Hospital"],["👮","Comisaría CNP"],["🚓","Comisaría GC"],
+ ["🛣️","Conservación de Carreteras"],["🪖","Base del Ejército de Tierra"],
+ ["🚒","Bomberos Ciudad y SpringField"],["🔫","Armería Ciudad y SpringField"],
+ ["⛓️","Cárcel"],["⚖️","Juzgado"]
+];
+
+const $=s=>document.querySelector(s);
+const tabs=$("#tabs"),list=$("#list"),foot=$("#foot"),q=$("#q");
+let cur=CATS[0].id;
+
+CATS.forEach(c=>{
+  const b=document.createElement("button");
+  b.className="tab";b.dataset.id=c.id;b.setAttribute("role","tab");b.textContent=c.ic+" "+c.name;
+  b.onclick=()=>{cur=c.id;q.value="";render()};
+  tabs.appendChild(b);
+});
+
+const esc=s=>String(s).replace(/[&<>]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[m]));
+
+function card(c,it,label,d){
+  const st=`style="animation-delay:${Math.min(d*40,400)}ms"`;
+  if(c.terms){
+    return `<article class="rule term" ${st}>${label?`<div class="catlabel">${label}</div>`:""}<b>${esc(it[0])}<span>${esc(it[1])}</span></b><p>${esc(it[2])}</p></article>`;
+  }
+  const body=it.l?`<ul>${it.l.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:`<p>${esc(it.p)}</p>`;
+  return `<article class="rule" ${st}>${label?`<div class="catlabel">${label}</div>`:""}<h3><span>${it.i}</span>${esc(it.t)}</h3>${body}</article>`;
+}
+const text=(c,it)=>(c.terms?it.join(" "):it.t+" "+(it.l?it.l.join(" "):it.p)).toLowerCase();
+
+function render(){
+  const term=q.value.trim().toLowerCase();
+  document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("on",!term&&t.dataset.id===cur));
+  if(term){
+    let html="",n=0;
+    CATS.forEach(c=>(c.terms||c.items).forEach(it=>{if(text(c,it).includes(term))html+=card(c,it,c.ic+" "+c.name,n++)}));
+    foot.style.display="none";
+    list.innerHTML=html||`<div class="empty">No hay resultados para “${esc(term)}”.</div>`;
+  }else{
+    const c=CATS.find(x=>x.id===cur);
+    list.innerHTML=(c.terms||c.items).map((it,i)=>card(c,it,"",i)).join("");
+    foot.style.display="";foot.textContent=c.foot;
+  }
+}
+q.addEventListener("input",render);render();
+
+$("#zgrid").innerHTML=ZONES.map(z=>{
+  const desc=z[2]||"Se permite rolear, pero sin ningún rol agresivo en su interior.";
+  const cls=z[3]||"",lab=z[4]||"Rol permitido";
+  return `<div class="card z rv"><div class="ic">${z[0]}</div><h3>${esc(z[1])}</h3><p>${desc}</p><span class="badge ${cls}">${lab}</span></div>`;
+}).join("");
+
+/* marquee */
+const words=["Rol serio","Staff activo","Normas claras","Oviedo","Policía","Emergencias","Ciudadanos","Respeto","Realismo","Diversión"];
+const mq=words.map(w=>`<span>${w}</span><span>✦</span>`).join("");
+$("#mq").innerHTML=mq+mq;
+
+/* contadores */
+const targets={normas:CATS.filter(c=>c.items).length,zonas:ZONES.length,siglas:CATS.find(c=>c.terms).terms.length};
+document.querySelectorAll("[data-count]").forEach(el=>{
+  const t=targets[el.dataset.count];let n=0;
+  const id=setInterval(()=>{n++;el.textContent=n;if(n>=t)clearInterval(id)},70);
+});
+
+/* reveal + nav activo + progreso */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll(".rv").forEach(el=>io.observe(el));
+const links=[...document.querySelectorAll("#nav a,#mnav a")];
+const so=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting)links.forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+e.target.id));
+}),{rootMargin:"-40% 0px -50% 0px"});
+document.querySelectorAll("section[id]").forEach(s=>so.observe(s));
+const bar=$("#bar");
+addEventListener("scroll",()=>{const h=document.documentElement;bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+"%"},{passive:true});
+</script>
+</body>
+</html>
